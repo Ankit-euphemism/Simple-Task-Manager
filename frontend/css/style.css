@@ -1,0 +1,44 @@
+body {
+  font-family: sans-serif;
+  justify-content: center;
+  margin-top: 50px;
+  background-color: rgb(42, 116, 159);
+}
+.container {
+  justify-content: center;
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  text-align: center;
+  background-color: rgb(157, 162, 230);
+  border-radius: 10px;
+}
+h1 {
+  background-color: rgb(4, 24, 47);
+  color: rgb(252, 255, 255);
+}
+input {
+  padding: 10px;
+  margin-left: 10px;
+}
+li {
+  display: block;
+  list-style: none;
+  margin-left: 2px;
+  font-size:20px;
+  font-weight:bold;
+  padding:10px;
+  border:1px solid black;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+ul {
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.completed{
+  text-decoration: line-through;
+  color: gray;
+}
