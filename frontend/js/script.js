@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const api_url = "http://localhost:5000/tasks";
 
 async function fetchTasks() {
