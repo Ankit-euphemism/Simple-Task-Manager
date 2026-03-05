@@ -1,6 +1,6 @@
 import { Task } from "../types/task";
 
-const API_URL = "http://localhost:5000/tasks";
+const API_URL = "https://simple-task-manager-calp.onrender.com/tasks";
 
 export async function fetchTasks(): Promise<Task[]> {
   const res = await fetch(API_URL);
