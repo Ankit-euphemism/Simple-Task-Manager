@@ -1,6 +1,6 @@
 import { Task } from "../types/task";
 
-const API_URL = "https://simple-task-manager-1-ct6t.onrender.com/taskstasks";
+const API_URL = "https://simple-task-manager-1-ct6t.onrender.com/tasks";
 
 export async function fetchTasks(): Promise<Task[]> {
   const res = await fetch(API_URL);
