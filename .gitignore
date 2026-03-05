@@ -6,3 +6,4 @@ frontend/.env
 backend/.env
 .vscode/
 .idea/
+backend/certs/global-bundle.pem
