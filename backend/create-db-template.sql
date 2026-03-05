@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS taskmanager;
+
 use taskmanager;
 
 create table if not exists tasks(

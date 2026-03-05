@@ -61,7 +61,7 @@ function App() {
     <main className="page">
       <section className="panel">
         <header className="panel-header">
-          <p className="kicker">Simple Task Manager</p>
+          <p className="kicker">✳️ Tasks Stage</p>
           <h1>Plan your day, finish on time.</h1>
           <p className="subtitle">Track what matters with a clear and focused workflow.</p>
         </header>

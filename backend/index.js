@@ -2,46 +2,87 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import {getTasks,getTask,createTask,updateTask,deleteTask} from "./models/taskModel.js";
-import connectToDB from "./middlewares/connectToDB.js";
+import createTb from "./middlewares/createTb.js";
+
 const app= express();
+
 app.use(cors());
 app.use(express.json());
+app.use(createTb);
 
-app.use((err,req,res,next)=>{
-    console.error(err);
-    res.status(500).send("Something broke");
-});
+const parseTaskId = (rawId) => {
+        const id = Number(rawId);
+        if (!Number.isInteger(id) || id <= 0) {
+                return null;
+        }
+        return id;
+};
 
-app.use(connectToDB);
-
-app.get("/tasks",async (req,res)=>{
+app.get("/tasks",async (req,res,next)=>{
+    try {
     const getAll= await getTasks();
     res.send(getAll);
+    } catch (error) {
+        next(error);
+    }
 });
 
-app.get("/tasks/:id",async (req,res)=>{
-    const id= Number(req.params.id);
+app.get("/tasks/:id",async (req,res,next)=>{
+        const id = parseTaskId(req.params.id);
+        if (id === null) {
+                return res.status(400).json({ message: "Invalid task id" });
+        }
+
+    try {
     const getOne= await getTask(id);
     res.send(getOne);
+    } catch (error) {
+        next(error);
+    }
 });
 
-app.post("/tasks",async (req,res) => {
+app.post("/tasks",async (req,res,next) => {
+    try {
     const {title,completed}= req.body;
     const create = await createTask(title,completed);
     res.send(create);
+    } catch (error) {
+        next(error);
+    }
 });
 
-app.put("/tasks/:id",async (req,res)=>{
-    const id= Number(req.params.id);
+app.put("/tasks/:id",async (req,res,next)=>{
+        const id = parseTaskId(req.params.id);
+        if (id === null) {
+                return res.status(400).json({ message: "Invalid task id" });
+        }
+
+    try {
     const {title,completed}= req.body;
     const update = await updateTask(id,title,completed);
     res.send(update);
+    } catch (error) {
+        next(error);
+    }
 });
 
-app.delete("/tasks/:id",async (req,res)=>{
-    const id= Number(req.params.id);
+app.delete("/tasks/:id",async (req,res,next)=>{
+        const id = parseTaskId(req.params.id);
+        if (id === null) {
+                return res.status(400).json({ message: "Invalid task id" });
+        }
+
+    try {
     const delTask = await deleteTask(id);
     res.send(delTask);
+    } catch (error) {
+        next(error);
+    }
+});
+
+app.use((err,req,res,next)=>{
+        console.error(err);
+        res.status(500).send("Something broke");
 });
 
 dotenv.config();
