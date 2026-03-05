@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import {getTasks,getTask,createTask,updateTask,deleteTask} from "./models/taskModel.js";
-
+import connectToDB from "./middlewares/connectToDB.js";
 const app= express();
 app.use(cors());
 app.use(express.json());
@@ -11,6 +11,8 @@ app.use((err,req,res,next)=>{
     console.error(err);
     res.status(500).send("Something broke");
 });
+
+app.use(connectToDB);
 
 app.get("/tasks",async (req,res)=>{
     const getAll= await getTasks();
